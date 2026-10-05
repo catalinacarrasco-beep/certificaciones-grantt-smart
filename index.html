@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()">
+  <meta name="robots" content="index,follow">
+  <title>Información Técnica — Equipos Smart Grantt | Cumplimiento SUBTEL</title>
+  <style>
+    :root {
+      --navy: #005f8a;
+      --blue: #00A0DF;
+      --blue-dark: #0080b8;
+      --blue-light: #e8f5fc;
+      --text: #1a1a1a;
+      --text-secondary: #4a5568;
+      --bg: #ffffff;
+      --bg-alt: #f5f9fb;
+      --border: #d8e6ed;
+      --radius: 8px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --navy: #5cc8f0;
+        --blue: #00A0DF;
+        --blue-dark: #3db8ea;
+        --blue-light: #0d2535;
+        --text: #e2e8ed;
+        --text-secondary: #9aafbf;
+        --bg: #0a1218;
+        --bg-alt: #0f1c26;
+        --border: #1e3345;
+      }
+    }
+    :root[data-theme="dark"] {
+      --navy: #5cc8f0;
+      --blue: #00A0DF;
+      --blue-dark: #3db8ea;
+      --blue-light: #0d2535;
+      --text: #e2e8ed;
+      --text-secondary: #9aafbf;
+      --bg: #0a1218;
+      --bg-alt: #0f1c26;
+      --border: #1e3345;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #007ab8 0%, #00A0DF 100%);
+      color: #fff;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .header { background: linear-gradient(135deg, #004d73 0%, #006f9e 100%); }
+    }
+    :root[data-theme="dark"] .header { background: linear-gradient(135deg, #004d73 0%, #006f9e 100%); }
+    .header__badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.15);
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      line-height: 1.3;
+    }
+    .header p {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    .nav {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 0.6rem 1rem;
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .nav a:hover {
+      background: var(--blue-light);
+      color: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .product {
+      padding: 3rem 0 1rem;
+      border-bottom: 3px solid var(--border);
+      margin-bottom: 1rem;
+    }
+    .product:last-of-type { border-bottom: none; }
+    .product__header {
+      background: var(--blue-light);
+      padding: 1.3rem 1.5rem;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+      border-left: 4px solid var(--blue);
+    }
+    .product__eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+    .product__title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .product__subtitle {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .section {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .section:last-child { border-bottom: none; }
+    .section__label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+    .section__title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+
+    .info-grid { display: grid; grid-template-columns: 1fr; gap: 0; }
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 0.3rem;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      min-width: 200px;
+      flex-shrink: 0;
+    }
+    .info-value {
+      font-size: 0.9rem;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .tech-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.88rem;
+    }
+    .tech-table th {
+      text-align: left;
+      padding: 0.65rem 0.8rem;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-weight: 600;
+      font-size: 0.8rem;
+      border-bottom: 2px solid var(--border);
+    }
+    .tech-table td {
+      padding: 0.6rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .tech-table tr:last-child td { border-bottom: none; }
+
+    .cert-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    .cert-badge {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.7rem 1rem;
+      font-size: 0.82rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 180px;
+    }
+    .cert-badge strong {
+      color: var(--blue);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .download-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.7rem;
+      margin-top: 1rem;
+    }
+    .download-card {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.9rem 1rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .download-card:hover { border-color: var(--blue); }
+    .download-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--blue-dark);
+      color: #fff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .download-info { flex: 1; min-width: 0; }
+    .download-info span {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .download-info small {
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+    }
+
+    .declaration-box {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+    .declaration-box p { margin-bottom: 0.8rem; }
+    .declaration-box p:last-child { margin-bottom: 0; }
+    .declaration-box .signature {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .integration-box {
+      background: var(--blue-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+    .integration-box h4 {
+      font-size: 0.9rem;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+    }
+
+    .notice {
+      background: var(--bg-alt);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.2rem;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-top: 1rem;
+    }
+
+    .normativa-ref {
+      background: var(--blue-light);
+      border-radius: var(--radius);
+      padding: 1rem 1.2rem;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin: 2rem 0;
+      line-height: 1.6;
+    }
+    .normativa-ref strong { color: var(--text); }
+
+    .footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+    .footer p { margin-bottom: 0.3rem; }
+
+    @media (max-width: 600px) {
+      .header h1 { font-size: 1.3rem; }
+      .info-label { min-width: 100%; }
+      .cert-list { flex-direction: column; }
+      .cert-badge { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__badge">Cumplimiento Res. Exenta N° 737/2025 — SUBTEL</div>
+    <h1>Información Técnica — Equipos Smart Grantt</h1>
+    <p>Documentación de cumplimiento para equipos de telecomunicaciones de alcance reducido</p>
+  </header>
+
+  <nav class="nav" aria-label="Selector de producto">
+    <a href="#placa">Placa Smart — Halux ISM</a>
+    <a href="#embutir">Embutir Smart — ST-DCA321C</a>
+  </nav>
+
+  <div class="container">
+
+    <div class="normativa-ref">
+      <strong>Nota regulatoria:</strong> Esta página se publica en conformidad con lo dispuesto en el Artículo 2°, numeral 2), literales A, B y C de la <strong>Resolución Exenta N° 1.985 de 2017</strong>, modificada por la <strong>Resolución Exenta N° 737 de 2025</strong>, de la Subsecretaría de Telecomunicaciones de Chile.
+    </div>
+
+    <!-- =====  PRODUCTO 1: PLACA SMART HALUX  ===== -->
+    <article class="product" id="placa">
+      <div class="product__header">
+        <div class="product__eyebrow">Producto 1</div>
+        <h2 class="product__title">Interruptor Electrónico Empotrable — Placa Smart</h2>
+        <p class="product__subtitle">Marca Grantt Halux · Modelos ISM1 / ISM2 / ISM3</p>
+      </div>
+
+      <section class="section">
+        <div class="section__label">Sección A</div>
+        <h3 class="section__title">Información Comercial</h3>
+        <div class="info-grid">
+          <div class="info-row"><div class="info-label">Fecha de publicación</div><div class="info-value">Octubre 2026</div></div>
+          <div class="info-row"><div class="info-label">Nombre del equipo</div><div class="info-value">Interruptor Electrónico Empotrable (Domótica)</div></div>
+          <div class="info-row"><div class="info-label">Marca</div><div class="info-value">Grantt Halux</div></div>
+          <div class="info-row"><div class="info-label">Modelos</div><div class="info-value">ISM1 (1 vía) · ISM2 (2 vías) · ISM3 (3 vías)</div></div>
+          <div class="info-row"><div class="info-label">Fabricante del equipo</div><div class="info-value">Taili Industrial Co., Ltd<br>No. 1, North Juguangyuan Road, High-Tech Industrial Park, Wenzhou City, Zhejiang, China</div></div>
+          <div class="info-row"><div class="info-label">Fabricante del módulo RF</div><div class="info-value">Hangzhou Tuya Information Technology Co., Ltd<br>Room 301, Building 1, Huace Center, Xihu District, Hangzhou, Zhejiang, China</div></div>
+          <div class="info-row"><div class="info-label">Importador en Chile</div><div class="info-value">Representaciones Grantt Ltda</div></div>
+          <div class="info-row"><div class="info-label">Domicilio</div><div class="info-value">Santa Margarita 742, San Bernardo, Santiago, Chile</div></div>
+          <div class="info-row"><div class="info-label">Correo de contacto</div><div class="info-value">cristobal.vigil@grantt.cl</div></div>
+          <div class="info-row"><div class="info-label">Sitio web</div><div class="info-value">www.grantt.cl</div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__label">Sección B</div>
+        <h3 class="section__title">Características Técnicas</h3>
+        <table class="tech-table">
+          <thead><tr><th>Parámetro</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td>Tipo de equipo</td><td>Interruptor Electrónico Empotrable (Domótica)</td></tr>
+            <tr><td>Marca / Modelos</td><td>Grantt Halux — ISM1, ISM2, ISM3</td></tr>
+            <tr><td>Módulo inalámbrico</td><td>Tuya T1-3S (Wi-Fi + Bluetooth)</td></tr>
+            <tr><td>Tecnología Wi-Fi</td><td>IEEE 802.11 b/g/n (2.4 GHz, HT20)<br>Modulación: CCK, DSSS, BPSK, QPSK, 16-QAM, 64-QAM</td></tr>
+            <tr><td>Tecnología Bluetooth</td><td>Bluetooth Low Energy 5.2 (1 Mbps) — GFSK</td></tr>
+            <tr><td>Banda Wi-Fi</td><td>2412 – 2462 MHz (11 canales)</td></tr>
+            <tr><td>Banda BLE</td><td>2402 – 2480 MHz (40 canales)</td></tr>
+            <tr><td>Potencia máx. conducida Wi-Fi</td><td>20.12 dBm (102.8 mW)</td></tr>
+            <tr><td>Potencia máx. conducida BLE</td><td>5.85 dBm (3.85 mW)</td></tr>
+            <tr><td>p.i.r.e. máxima Wi-Fi</td><td>≤ 20 dBm (100 mW)</td></tr>
+            <tr><td>p.i.r.e. máxima BLE</td><td>≤ 20 dBm (100 mW)</td></tr>
+            <tr><td>Tipo de antena</td><td>PCB integrada (onboard)</td></tr>
+            <tr><td>Ganancia de antena</td><td>1.68 dBi (pico)</td></tr>
+            <tr><td>Tensión de alimentación (equipo)</td><td>100–240 V~ 50/60 Hz</td></tr>
+            <tr><td>Tensión de alimentación (módulo)</td><td>3.0–3.6 VDC (típico 3.3 V)</td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="font-size:0.95rem;margin-top:2rem;margin-bottom:0.8rem;color:var(--text);">Certificaciones RF del módulo T1-3S</h4>
+        <div class="cert-list">
+          <div class="cert-badge"><strong>FCC (EE.UU.)</strong>FCC ID: 2ANDL-T1-3S</div>
+          <div class="cert-badge"><strong>SRRC (China)</strong>CMIIT ID: 25J3398BT135</div>
+          <div class="cert-badge"><strong>CE RED (UE)</strong>TPS-RED500876 i02</div>
+          <div class="cert-badge"><strong>Laboratorio</strong>TÜV SÜD (ILAC-MRA Nº 3745.01)</div>
+        </div>
+
+        <h4 style="font-size:0.95rem;margin-top:2rem;margin-bottom:0.5rem;color:var(--text);">Informes de Ensayo (Test Reports)</h4>
+        <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.5rem;">Informes emitidos por TÜV SÜD Certification and Testing (China) Co., Ltd. — Laboratorio acreditado ILAC-MRA.</p>
+        <div class="download-list">
+          <a href="docs/T1-3S_FCC_Wi-Fi_Report.pdf" class="download-card" rel="noopener noreferrer">
+            <div class="download-icon">PDF</div>
+            <div class="download-info"><span>Informe RF — Wi-Fi 802.11 b/g/n</span><small>Reporte N° 709502502981-00A · TÜV SÜD</small></div>
+          </a>
+          <a href="docs/T1-3S_FCC_BLE_Report.pdf" class="download-card" rel="noopener noreferrer">
+            <div class="download-icon">PDF</div>
+            <div class="download-info"><span>Informe RF — Bluetooth LE</span><small>Reporte N° 709502502981-00B · TÜV SÜD</small></div>
+          </a>
+          <a href="docs/T1-3S_FCC_MPE_Report.pdf" class="download-card" rel="noopener noreferrer">
+            <div class="download-icon">PDF</div>
+            <div class="download-info"><span>Exposición RF (MPE)</span><small>Reporte N° 709502502981-00C · TÜV SÜD</small></div>
+          </a>
+          <a href="docs/T1-3S_Antenna_Specification.pdf" class="download-card" rel="noopener noreferrer">
+            <div class="download-icon">PDF</div>
+            <div class="download-info"><span>Especificación de antena PCB</span><small>Tuya — Patrón de radiación y ganancia</small></div>
+          </a>
+          <a href="docs/Declaracion_de_Conformidad_Grantt_Halux.pdf" class="download-card" rel="noopener noreferrer">
+            <div class="download-icon">PDF</div>
+            <div class="download-info"><span>Declaración de Conformidad</span><small>Representaciones Grantt Ltda — Halux ISM1/2/3</small></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__label">Sección C</div>
+        <h3 class="section__title">Declaración de Conformidad</h3>
+        <div class="declaration-box">
+          <p><strong>Representaciones Grantt Ltda</strong>, en su calidad de importador y representante en Chile de los interruptores electrónicos empotrados marca <strong>Grantt Halux</strong>, modelos <strong>ISM1, ISM2 e ISM3</strong>, fabricados por Taili Industrial Co., Ltd (China), declara que:</p>
+          <p>Los equipos previamente individualizados, que incorporan el módulo inalámbrico Wi-Fi y Bluetooth modelo <strong>T1-3S</strong>, fabricado por Hangzhou Tuya Information Technology Co., Ltd, <strong>cumplen con las disposiciones establecidas en la Norma Técnica de Equipos de Alcance Reducido, aprobada por la Resolución Exenta N° 1.985, de 2017, de la Subsecretaría de Telecomunicaciones</strong>, y sus modificaciones posteriores, incluyendo la Resolución Exenta N° 737 de 2025.</p>
+          <p>Los equipos operan en la banda de 2.400 a 2.483,5 MHz bajo protocolos IEEE 802.11 b/g/n y Bluetooth Low Energy 5.2, con potencia isotrópica radiada equivalente (p.i.r.e.) dentro de los límites establecidos por la normativa vigente.</p>
+          <div class="signature">
+            <p><strong>Representaciones Grantt Ltda</strong><br>
+            Santa Margarita 742, San Bernardo, Santiago, Chile<br>
+            Firmado por: Cristóbal Vigil Cruz — Gerente General<br>
+            Fecha: Octubre 2026</p>
+          </div>
+        </div>
+
+        <div class="integration-box">
+          <h4>Declaración de Integración del Módulo</h4>
+          <p>En conformidad con lo aceptado por la SUBTEL según las orientaciones publicadas para equipos que integran módulos de radiofrecuencia: los interruptores electrónicos empotrados <strong>Grantt Halux ISM1, ISM2 e ISM3</strong> utilizan en su interior el módulo de radiofrecuencia <strong>Tuya T1-3S</strong> (FCC ID: 2ANDL-T1-3S). Los informes de ensayo adjuntos corresponden a dicho módulo y son aplicables a los equipos finales mencionados, los cuales no modifican las características de radiofrecuencia del módulo integrado.</p>
+        </div>
+      </section>
+    </article>
+
+    <!-- =====  PRODUCTO 2: EMBUTIR SMART  ===== -->
+    <article class="product" id="embutir">
+      <div class="product__header">
+        <div class="product__eyebrow">Producto 2</div>
+        <h2 class="product__title">Interruptor Inteligente de Embutir</h2>
+        <p class="product__subtitle">Marca Grantt Halux · Modelos ST-DCA321C-2200W3-WF-G1 / G3</p>
+      </div>
+
+      <section class="section">
+        <div class="section__label">Sección A</div>
+        <h3 class="section__title">Información Comercial</h3>
+        <div class="info-grid">
+          <div class="info-row"><div class="info-label">Fecha de publicación</div><div class="info-value">Octubre 2026</div></div>
+          <div class="info-row"><div class="info-label">Nombre del equipo</div><div class="info-value">Interruptor Inteligente de Embutir (Domótica)</div></div>
+          <div class="info-row"><div class="info-label">Marca</div><div class="info-value">Grantt Halux</div></div>
+          <div class="info-row"><div class="info-label">Modelos</div><div class="info-value">ST-DCA321C-2200W3-WF-G1 · ST-DCA321C-2200W3-WF-G3</div></div>
+          <div class="info-row"><div class="info-label">Fabricante del módulo RF</div><div class="info-value">Hangzhou Tuya Information Technology Co., Ltd<br>Room 301, Building 1, Huace Center, Xihu District, Hangzhou, Zhejiang, China</div></div>
+          <div class="info-row"><div class="info-label">Importador en Chile</div><div class="info-value">Representaciones Grantt Ltda</div></div>
+          <div class="info-row"><div class="info-label">Domicilio</div><div class="info-value">Santa Margarita 742, San Bernardo, Santiago, Chile</div></div>
+          <div class="info-row"><div class="info-label">Correo de contacto</div><div class="info-value">cristobal.vigil@grantt.cl</div></div>
+          <div class="info-row"><div class="info-label">Sitio web</div><div class="info-value">www.grantt.cl</div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__label">Sección B</div>
+        <h3 class="section__title">Características Técnicas</h3>
+        <table class="tech-table">
+          <thead><tr><th>Parámetro</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td>Tipo de equipo</td><td>Interruptor Inteligente de Embutir (Domótica)</td></tr>
+            <tr><td>Marca / Modelos</td><td>Grantt Halux — ST-DCA321C-2200W3-WF-G1 / G3</td></tr>
+            <tr><td>Módulo inalámbrico</td><td>Tuya T1-2S-NL (Wi-Fi + Bluetooth)</td></tr>
+            <tr><td>Tecnología Wi-Fi</td><td>IEEE 802.11 b/g/n (2.4 GHz) — Adaptive</td></tr>
+            <tr><td>Tecnología Bluetooth</td><td>Bluetooth Low Energy — GFSK</td></tr>
+            <tr><td>Banda Wi-Fi</td><td>2412 – 2462 MHz</td></tr>
+            <tr><td>Banda BLE</td><td>2402 – 2480 MHz</td></tr>
+            <tr><td>Potencia máx. conducida Wi-Fi</td><td>24.66 dBm (292.4 mW)</td></tr>
+            <tr><td>Potencia máx. conducida BLE</td><td>6.89 dBm (4.88 mW)</td></tr>
+            <tr><td>p.i.r.e. máxima (según CE-RED)</td><td>17.0 dBm (Wi-Fi) · 6.0 dBm (BLE)</td></tr>
+            <tr><td>Tipo de antena</td><td>PCB integrada (onboard)</td></tr>
+            <tr><td>Ganancia de antena</td><td>≤ 2.2 dBi</td></tr>
+            <tr><td>Tensión de alimentación (equipo)</td><td>90–250 V~ 50/60 Hz</td></tr>
+            <tr><td>Tensión de alimentación (módulo)</td><td>3.0–3.6 VDC</td></tr>
+            <tr><td>Carga máxima</td><td>2200 W (carga resistiva) · 10 A</td></tr>
+            <tr><td>Grado de protección</td><td>IP20</td></tr>
+            <tr><td>Material carcasa</td><td>ABS</td></tr>
+            <tr><td>Temperatura de operación</td><td>-25 °C a +40 °C</td></tr>
+          </tbody>
+        </table>
+
+        <h4 style="font-size:0.95rem;margin-top:2rem;margin-bottom:0.8rem;color:var(--text);">Certificaciones RF del módulo T1-2S-NL</h4>
+        <div class="cert-list">
+          <div class="cert-badge"><strong>CE RED (UE)</strong>EU Type Examination<br>TPS-RED500876 i01<br>Notified Body N° 0123</div>
+          <div class="cert-badge"><strong>ISED (Canadá)</strong>IC ID: 23243-T12SNL<br>Cert. CD/011573</div>
+          <div class="cert-badge"><strong>Ciberseguridad</strong>EN 18031-1:2024<br>Art. 3.3(d) RED</div>
+          <div class="cert-badge"><strong>Laboratorio</strong>TÜV SÜD (Munich / Shanghái)<br>ILAC-MRA</div>
+        </div>
+
+        <h4 style="font-size:0.95rem;margin-top:2rem;margin-bottom:0.5rem;color:var(--text);">Informes y Certificados</h4>
+        <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.5rem;">Certificados emitidos por TÜV SÜD Product Service GmbH (Munich) y TÜV SÜD BABT Unlimited — Laboratorios acreditados ILAC-MRA.</p>
+        <div class="download-list">
+          <a href="docs/T1-2S-NL_CE-RED_EU_Type_Examination.pdf" class="download-card" rel="noopener noreferrer">
+            <div class="download-icon">PDF</div>
+            <div class="download-info"><span>Certificado CE-RED — EU Type Examination</span><small>TPS-RED500876 i01 · TÜV SÜD Munich · Notified Body 0123</small></div>
+          </a>
+          <a href="docs/T1-2S-NL_IC_Canada_Certificate.pdf" class="download-card" rel="noopener noreferrer">
+            <div class="download-icon">PDF</div>
+            <div class="download-info"><span>Certificado ISED Canada — FCB Technical Acceptance</span><small>IC ID: 23243-T12SNL · TÜV SÜD BABT · CD/011573 · con tabla RF completa</small></div>
+          </a>
+          <a href="docs/T1-2S-NL_CRA_Cybersecurity_EN18031.pdf" class="download-card" rel="noopener noreferrer">
+            <div class="download-icon">PDF</div>
+            <div class="download-info"><span>Certificado Ciberseguridad — EN 18031-1:2024</span><small>Cumplimiento Cyber Resilience Act · Art. 3.3(d) RED</small></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__label">Sección C</div>
+        <h3 class="section__title">Declaración de Conformidad</h3>
+        <div class="declaration-box">
+          <p><strong>Representaciones Grantt Ltda</strong>, en su calidad de importador y representante en Chile de los interruptores inteligentes de embutir marca <strong>Grantt Halux</strong>, modelos <strong>ST-DCA321C-2200W3-WF-G1</strong> y <strong>ST-DCA321C-2200W3-WF-G3</strong>, declara que:</p>
+          <p>Los equipos previamente individualizados, que incorporan el módulo inalámbrico Wi-Fi y Bluetooth modelo <strong>T1-2S-NL</strong>, fabricado por Hangzhou Tuya Information Technology Co., Ltd, <strong>cumplen con las disposiciones establecidas en la Norma Técnica de Equipos de Alcance Reducido, aprobada por la Resolución Exenta N° 1.985, de 2017, de la Subsecretaría de Telecomunicaciones</strong>, y sus modificaciones posteriores, incluyendo la Resolución Exenta N° 737 de 2025.</p>
+          <p>Los equipos operan en la banda de 2.400 a 2.483,5 MHz bajo protocolos IEEE 802.11 b/g/n y Bluetooth Low Energy, con potencia isotrópica radiada equivalente (p.i.r.e.) dentro de los límites establecidos por la normativa vigente.</p>
+          <div class="signature">
+            <p><strong>Representaciones Grantt Ltda</strong><br>
+            Santa Margarita 742, San Bernardo, Santiago, Chile<br>
+            Firmado por: Cristóbal Vigil Cruz — Gerente General<br>
+            Fecha: Octubre 2026</p>
+          </div>
+        </div>
+
+        <div class="integration-box">
+          <h4>Declaración de Integración del Módulo</h4>
+          <p>En conformidad con lo aceptado por la SUBTEL según las orientaciones publicadas para equipos que integran módulos de radiofrecuencia: los interruptores inteligentes de embutir <strong>ST-DCA321C-2200W3-WF-G1</strong> y <strong>ST-DCA321C-2200W3-WF-G3</strong> utilizan en su interior el módulo de radiofrecuencia <strong>Tuya T1-2S-NL</strong> (IC ID: 23243-T12SNL · CE-RED TPS-RED500876 i01). Los certificados e informes adjuntos corresponden a dicho módulo y son aplicables a los equipos finales mencionados, los cuales no modifican las características de radiofrecuencia del módulo integrado.</p>
+        </div>
+
+        <div class="notice">
+          <strong>Nota:</strong> La Declaración de Conformidad firmada por Representaciones Grantt Ltda. para este modelo se publicará en formato PDF descargable una vez completado el proceso de firma.
+        </div>
+      </section>
+    </article>
+
+  </div>
+
+  <footer class="footer">
+    <p><strong>Representaciones Grantt Ltda</strong> — Santa Margarita 742, San Bernardo, Santiago, Chile</p>
+    <p>Página publicada en cumplimiento de la Resolución Exenta N° 737/2025 de la Subsecretaría de Telecomunicaciones</p>
+    <p style="margin-top:0.5rem;">Última actualización: Octubre 2026</p>
+  </footer>
+
+</body>
+</html>
